@@ -5,18 +5,26 @@
  * Zwraca 2 - błąd nieprawidłowych rozmiarów macierzy
  */
 int  backsubst(Matrix *x, Matrix *mat, Matrix *b) {
-				/**
-				 * Tutaj należy umieścić właściwą implemntację.
-				 */
+		/**
+		 * Tutaj należy umieścić właściwą implemntację.
+		**/
+	/* To ponizej jest przepisaniem b do x. Nalezy to poprawic! */
+	// Matrix[wiersz][kolumna]
+	// Zaczynamy od ostatniego wiersza
+	
+	const int ilosc_rownan = x->r;
+	if(x->r != mat->r || mat->r) return 2;
 
-				/* To ponizej jest przepisaniem b do x. Nalezy to poprawic! */
+	for (int r = ilosc_rownan - 1; r >= 0; r--) {		
+		const double mat_a = mat->data[r][r];
+		const double mat_b = b->data[r][0];
 
-				int i;
-				for (i =0; i < x->r; i++) {
-								x->data[i][0] = b->data[i][0];
-				}
+		if(mat_a == 0) return 1;
+		x->data[r][0] = mat_b/mat_a;
 
-				return 0;
+	}
+	
+	return 0;
 }
 
 
